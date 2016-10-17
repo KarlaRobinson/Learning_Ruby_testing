@@ -1,0 +1,2 @@
+module AnswerVoteHelper
+end
