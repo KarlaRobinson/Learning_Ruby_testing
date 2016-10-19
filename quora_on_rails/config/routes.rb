@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  get 'question/index'
+  get 'users/index'
 
-  get 'answer_vote/index'
+  get 'users/new'
 
-  get 'user/index'
+  # # receive form and create a user in db using data given by user
+  # get '/register' => 'users#new'
+  # post '/users' => 'users#create'
 
       #'path' => 'action'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'user#index'
+  root 'users#new'
+
+  # CRUD for classes: GET, POST, PATCH, PUT and DELETE
+  resources :users, :questions, :answers
 end
