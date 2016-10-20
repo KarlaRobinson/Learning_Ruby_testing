@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+    <% if @questions.length > 0 %>
+      <ol class="list-unstyled">
+        <% @questions.each do |ques|%>
+          <li>
+            <div class='media well'>
+              <%= ques.text %>
+              hi
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    <% else %>
+      <div class='media well'>
+        No questions have been created yet
+      </div>
+    <% end %>
+  </div>
+</div>

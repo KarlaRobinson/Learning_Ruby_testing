@@ -1,13 +1,8 @@
 Rails.application.routes.draw do
-  get 'users/index'
+#'controller/path' => 'method/action'
 
-  get 'users/new'
-
-  # # receive form and create a user in db using data given by user
-  # get '/register' => 'users#new'
-  # post '/users' => 'users#create'
-
-      #'path' => 'action'
+  get 'users/logout'
+  post 'users/login'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'users#new'

@@ -1,0 +1,31 @@
+<div class='row'>
+  <div class='col-md-12'>
+    <div class="media well">
+      <div class="media">
+         <a href="#" class="pull-left"><img alt="Bootstrap Media Preview" src="http://lorempixel.com/64/64/" class="media-object" /></a>
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= current_user.name %> </h4>
+            <ol class="list-unstyled">
+              <li><%= current_user.email %></li>
+              <li><%= current_user.questions.length %>  question/s</li>
+              <li><%= current_user.answers.length %>  answer/s</li>
+              <li><%= current_user.votes.length %>  vote/s</li>
+            </ol>
+            <div class="media well">
+              <% if current_user.questions.length > 0%>
+                <ol class="list-unstyled">
+                  <% current_user.questions.each do |ques| %>
+                    <li><%= ques.text %></li>
+                  <% end %>
+                </ol>
+              <% else %>
+                Questions you create will appear here
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
