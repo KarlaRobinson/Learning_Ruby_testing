@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       p errors[:name] if errors[:name] != []
       p errors[:email] if errors[:email] != []
       flash[:error] = "Your account could not be created"
-      render 'new'
+      redirect_back fallback_location: new_user_path
     end
   end
 
@@ -42,14 +42,15 @@ class UsersController < ApplicationController
         render 'show'
       else
         flash[:error] = 'Incorrect password'
+        redirect_back fallback_location: new_user_path
       end
     else
       flash[:error] = 'User does not exist'
+      redirect_back fallback_location: new_user_path
     end
   end
 
   def new
-    # p "*" * 50
     @user = User.new
   end
 

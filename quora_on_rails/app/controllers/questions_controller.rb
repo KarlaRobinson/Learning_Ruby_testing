@@ -4,26 +4,38 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
-  def index
+  def all
     @questions = Question.all
+  end
+
+  def index
   end
 
   def show
   end
 
   def create
-    p "*"* 50
-    p params
     @question = Question.new(text: params[:question][:text])
-    p @question
 
-    if @question.save
-      current_user.questions << @question
+    if current_user.questions << @question
       flash[:notice] = 'Your question was created successfully'
+      redirect_to user_questions_path
     else
-    p @question.errors
-      flash[:error] = 'Your question could not be saved'
+      flash[:error] = "Your question could not be saved (Question #{@question.errors.messages[:text].join})"
+      redirect_back fallback_location: new_user_question_path(current_user.id)
     end
-    render 'show'
   end
+
+  def destroy
+    @question.destroy
+    flash[:notice] = 'Your question was deleted'
+    redirect_back fallback_location: user_questions_path
+  end
+
+
+  private
+
+    def question_params
+      params.require(:question).permit(:text)
+    end
 end

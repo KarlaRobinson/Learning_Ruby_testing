@@ -2,7 +2,7 @@
   <div class="col-md-4">
       <!-- <div role="form"> -->
         <!-- <div class="form-group"> -->
-          <%= form_for @question do |f| %>
+          <%= form_for [current_user, @question] do |f| %>
                 <%= f.label 'Question' %>
                 <%= f.text_area :text, :placeholder => 'Enter your question here', :class => 'form-control' %>
                 <%= f.submit 'Create', :class => 'btn btn-medium btn-primary' %>

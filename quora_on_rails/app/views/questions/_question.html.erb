@@ -1,0 +1,16 @@
+<li>
+  <div class='media well'>
+    <%= question.text %>
+    <span class="label label-default pull-right">Answers: <%= question.answers.length %></span>
+    <span class="label label-default pull-right">Votes: <%= question.votes.length %></span>
+    <% @answers = question.answers %>
+    <%= render(@answers) %>
+<!--     <button type="button" class="btn btn-xs">
+      Reply
+    </button>
+    <button type="button" class="btn btn-xs">
+      Upvote
+    </button>
+    <%#= button_to "Reply", new_user_answer(current_id) %> -->
+  </div>
+</li> 

@@ -1,31 +1,45 @@
 <div class='row'>
-  <div class='col-md-12'>
-    <div class="media well">
-      <div class="media">
-         <a href="#" class="pull-left"><img alt="Bootstrap Media Preview" src="http://lorempixel.com/64/64/" class="media-object" /></a>
-        <div class="media-body">
-          <h4 class="media-heading">
+  <div class='col-md-10 col-md-offset-1'>
+    <div class='media well'>
+      <div class='media'>
+         <a href='#' class='pull-left'><img alt='Bootstrap Media Preview' src='http://lorempixel.com/64/64/' class='media-object' /></a>
+        <div class='media-body'>
+          <h4 class='media-heading'>
             <%= current_user.name %> </h4>
-            <ol class="list-unstyled">
+            <ol class='list-unstyled'>
               <li><%= current_user.email %></li>
               <li><%= current_user.questions.length %>  question/s</li>
               <li><%= current_user.answers.length %>  answer/s</li>
               <li><%= current_user.votes.length %>  vote/s</li>
             </ol>
-            <div class="media well">
-              <% if current_user.questions.length > 0%>
-                <ol class="list-unstyled">
-                  <% current_user.questions.each do |ques| %>
-                    <li><%= ques.text %></li>
-                  <% end %>
-                </ol>
-              <% else %>
-                Questions you create will appear here
-              <% end %>
-            </div>
         </div>
       </div>
     </div>
-
+    <ol class='list-unstyled'>
+      <% if current_user.questions.length > 0 %>
+        <% current_user.questions.each do |question| %>
+          <li class='dropdown active'>
+            <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Edit<span class='caret'></span></a>
+            <ul class='dropdown-menu'>
+              <li><%= link_to 'Edit', user_path(id: current_user.id) %></li>
+              <li><%= link_to 'Delete', users_logout_path %></li>
+            </ul>
+          </li>
+          <li>
+            <div class='media well'>
+              <%= question.text %>
+              <span class="label label-default pull-right">Answers: <%= question.answers.length %></span>
+              <span class="label label-default pull-right">Votes: <%= question.votes.length %></span>
+              <% @answers = question.answers %>
+              <%= render(@answers) %>
+            </div>
+          </li> 
+        <% end %>
+      <% else %>
+        <div class='media well'>
+          <p>Your questions will appear here</p>
+        </div>
+      <% end %>
+    </ol>
   </div>
 </div>
