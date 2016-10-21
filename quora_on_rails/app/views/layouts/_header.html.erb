@@ -27,11 +27,11 @@
           <li class='dropdown active'>
             <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><%= current_user.name %> <span class='caret'></span></a>
             <ul class='dropdown-menu'>
-              <li class='active'><%= link_to 'Profile', user_path(id: current_user.id) %></li>
+              <li><%= link_to 'Profile', user_path(id: current_user.id) %></li>
               <li><%= link_to 'Another action', '#' %></li>
-              <li><%= link_to 'Something else here', '#' %></li>
-              <li role='separator' class='divider'></li>
               <li><%= link_to 'Logout', users_logout_path %></li>
+              <li role='separator' class='divider'></li>
+              <li><%= link_to 'Delete Account', '#' %></li>
             </ul>
           </li>
         </ul>

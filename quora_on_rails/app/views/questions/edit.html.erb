@@ -1,0 +1,11 @@
+<div class='row'>
+  <div class='col-md-8 col-md-offset-2'>
+    <div class='media well'>
+      <% @question = Question.find(params[:id]) %>
+      <%= form_for [current_user, @question] do |f| %>
+        <%= f.text_field :text, :placeholder => @question.text , :class => 'form-control' %>
+        <%= f.submit :class => 'btn btn-primary form-inline' %>
+      <% end %>
+    </div> 
+  </div>
+</div>

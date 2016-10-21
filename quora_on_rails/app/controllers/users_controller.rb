@@ -16,17 +16,13 @@ class UsersController < ApplicationController
     @user = User.new(name: name, email: email, password: password)
 
     if @user.save
-      # format.html { redirect_to @user, notice: 'User was successfully created.' }
-      # format.json { render :show, status: :created, location: @user }
       flash[:notice] = "Your account has been created successfully"
       session[:id] = @user.id
       render 'show'
     else
-      # format.html { render :new }
-      # format.json { render json: @user.errors, status: :unprocessable_entity }
-      p errors = @user.errors.messages
-      p errors[:name] if errors[:name] != []
-      p errors[:email] if errors[:email] != []
+      # p errors = @user.errors.messages
+      # p errors[:name] if errors[:name] != []
+      # p errors[:email] if errors[:email] != []
       flash[:error] = "Your account could not be created"
       redirect_back fallback_location: new_user_path
     end

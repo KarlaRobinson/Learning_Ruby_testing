@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-4">
+    <p><%= @answer %></p>
+    <%= form_for [current_user, :question, @answer] do |f| %>
+          <%= f.label 'Answer' %>
+          <%= f.text_area :text, :placeholder => 'Enter your answer here', :class => 'form-control' %>
+          <%= f.submit :class => 'btn btn-medium btn-primary' %>
+    <% end %>
+  </div>
+</div>

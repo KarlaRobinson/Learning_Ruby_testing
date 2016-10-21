@@ -1,16 +1,32 @@
 <li>
   <div class='media well'>
-    <%= question.text %>
-    <span class="label label-default pull-right">Answers: <%= question.answers.length %></span>
-    <span class="label label-default pull-right">Votes: <%= question.votes.length %></span>
-    <% @answers = question.answers %>
-    <%= render(@answers) %>
-<!--     <button type="button" class="btn btn-xs">
-      Reply
-    </button>
-    <button type="button" class="btn btn-xs">
-      Upvote
-    </button>
-    <%#= button_to "Reply", new_user_answer(current_id) %> -->
+    <div class='col-md-8'>
+      <div class='text-muted'><%= User.find(question.user_id).name %> asked:</div>
+      <div class='lead'><%= question.text %></div>
+      <% if question.user_id == current_user.id %>
+        <div class='dropdown active'>
+          <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Edit<span class='caret'></span></a>
+          <ul class='dropdown-menu'>
+            <li><%= link_to 'Edit', edit_user_question_path(current_user.id, question.id) %></li>
+            <li><%= link_to 'Delete', user_question_path(current_user.id, question.id), method: :delete %></li>
+          </ul>
+        </div>
+      <% else %>
+        <%= form_tag new_user_question_answer_path(current_user, question), method: 'get', class: 'form-group' do %>
+          <%= submit_tag('Reply', class: 'btn btn-default btn-sm') %>
+        <% end %>
+        <%= form_tag new_user_question_answer_path(current_user, question), method: 'get', class: 'form-group' do %>
+          <%= button_tag('Upvote', class: 'btn btn-default btn-sm') %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class='col-md-4'>
+      <span class="label label-default pull-right">Answers: <%= question.answers.length %></span>
+      <span class="label label-default pull-right">Votes: <%= question.votes.length %></span>
+    </div>
+    <div class='col-sm-8 col-md-offset-1'>
+      <% @answers = question.answers %>
+      <%= render(@answers) %>
+    </div>
   </div>
-</li> 
+</li>
