@@ -16,14 +16,14 @@
           <%= submit_tag('Reply', class: 'btn btn-default btn-sm') %>
         <% end %>
         <%= form_tag(new_vote_path, method: 'get', class: 'form-group', remote: true ) do %>
-          <%= hidden_field_tag "question_id", question.id %>
+          <%= hidden_field_tag 'question_id', question.id %>
           <%= button_tag('Upvote', class: 'btn btn-default btn-sm') %>
         <% end %>
       <% end %>
     </div>
-    <div class='col-md-4'>
-      <span class="label label-default pull-right">Answers: <%= question.answers.length %></span>
-      <span class="label label-default pull-right">Votes: <%= question.votes.length %></span>
+    <div class='col-md-4 vote_parent<%=question.id%>'>
+      <span class='label label-default pull-right'>Answers: <%= question.answers.length %></span>
+      <span class='label label-default pull-right votes'>Votes: <%= question.votes.length %></span>
     </div>
     <div class='col-sm-8 col-md-offset-1'>
       <% @answers = question.answers %>

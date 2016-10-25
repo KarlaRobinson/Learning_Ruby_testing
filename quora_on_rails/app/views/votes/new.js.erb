@@ -1,2 +1,3 @@
-console.log('hola')
-alert('hi');
+$(document).ready(function() {
+  $('.vote_parent<%= @id %> .votes').html('Votes: <%= @v_num %>');
+});

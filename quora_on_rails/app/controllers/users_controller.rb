@@ -20,10 +20,7 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       render 'show'
     else
-      # p errors = @user.errors.messages
-      # p errors[:name] if errors[:name] != []
-      # p errors[:email] if errors[:email] != []
-      flash[:error] = "Your account could not be created"
+      flash[:error] = "Your account could not be created (#{@user.errors.full_messages.to_sentence})"
       redirect_back fallback_location: new_user_path
     end
   end

@@ -1,12 +1,11 @@
 class VotesController < ApplicationController
   def new
     @vote = Vote.new
+    question = Question.find(params[:question_id])
     current_user.votes << @vote
-    Question.find(params[:question_id]).votes << @vote
-    p @vote
-    p @vote.save
-  end
-
-  def create
+    question.votes << @vote
+    @vote.save
+    @id = question.id
+    @v_num = question.votes.length
   end
 end
