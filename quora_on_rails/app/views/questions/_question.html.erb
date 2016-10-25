@@ -15,7 +15,8 @@
         <%= form_tag new_user_question_answer_path(current_user, question), method: 'get', class: 'form-group' do %>
           <%= submit_tag('Reply', class: 'btn btn-default btn-sm') %>
         <% end %>
-        <%= form_tag new_user_question_answer_path(current_user, question), method: 'get', class: 'form-group' do %>
+        <%= form_tag(new_vote_path, method: 'get', class: 'form-group', remote: true ) do %>
+          <%= hidden_field_tag "question_id", question.id %>
           <%= button_tag('Upvote', class: 'btn btn-default btn-sm') %>
         <% end %>
       <% end %>
