@@ -1,0 +1,4 @@
+1.- Leer los archivos csv
+2.- Relacionar todos los archivos basados en el contxid
+3.- Gerenar un nuevo archivo csv con los datos relacionados
+4.- El archivo base es  prueba-formularios, este archivo contiene todos los registros, prueba-resultados y prueba-redirecciones es informacion agregada de los formularios.
