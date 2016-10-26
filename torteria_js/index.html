@@ -15,16 +15,21 @@
       <input class="form-group" type="submit" value="Crear Horno">
     </form>
     <div class="oven">
-      <div id="timer">class Timer</div>
-      <div class="clear">class Clear</div>
+      <div id="timer"><h4></h4><p></p></div>
+      <div class="clear"></div>
       <form class="cook" action="" method="post">
-        <input class="form-group" type="text" name="type" placeholder="Type of Cake">
+        <select id="type">
+          <option>Chocolate</option>
+          <option>ApplePie</option>
+          <option>AngelCake</option>
+          <option>VanillaSwirl</option>
+        </select>
+
         <input class="form-group" type="text" name="time" placeholder="Time">
         <input class="form-group" type="submit" value="Start">
       </form>
     </div>
     <ol id="history">
-      <li>id history</li>
     </ol>
   </div>
 <div id='countdown'>class countdown</div>
