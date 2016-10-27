@@ -8,6 +8,7 @@
   <!-- Esto especifica que podamos utilizar acentos dentro del HTML  -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+  <!-- Jquery UI drag and drop -->
   <link rel="stylesheet" href="jquery-ui.min.css">
   <link rel="stylesheet" href="styles.css">
 
@@ -22,8 +23,20 @@
   </div>
 
   <div id="content">
-    <div id="cardPile"></div>
-    <div id="cardSlots"></div>
+    <div id="cardPile">
+        <div class="draggable">0</div>
+        <div class="draggable">1</div>
+        <div class="draggable">2</div>
+        <div class="draggable">3</div>
+        <div class="draggable">4</div>
+        <div class="draggable">5</div>
+        <div class="draggable">6</div>
+        <div class="draggable">7</div>
+        <div class="draggable">8</div>
+        <div class="draggable">9</div>
+    </div>
+    <div id="cardSlots">
+    </div>
     <div id="total_sum">0</div>
   </div>
 </body>
