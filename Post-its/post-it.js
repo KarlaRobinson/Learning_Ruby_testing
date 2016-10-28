@@ -1,6 +1,8 @@
 $( document ).ready(function() {
 
-  $("#board").on('click', '.close', function() {
+  $("#board").on('mousedown', '.close', function(e) {
+    e.stopPropagation();
+    console.log('close');
     $(this).parent().parent().remove();
   });
 
