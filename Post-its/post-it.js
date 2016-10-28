@@ -1,38 +1,30 @@
 $( document ).ready(function() {
 
-  $( "#board" ).on('click', '.close', function() {
+  $("#board").on('click', '.close', function() {
     $(this).parent().parent().remove();
   });
 
-  $('#board').dblclick(function(here) {
-    // if(){
-      position(here);
-    // }
-    // console.log($(this).attr('id'));
+  $('#board').on("dblclick", function(here) {
+    position(here);
   });
 
-  $('.post-it').dblclick(function(here) {
-    here.stopPropagation();
+  $("#board").on("dblclick", '.post-it', function(e) {
+    e.stopPropagation();
   });
 
-  $('.header').mousedown(function() {
-        // id = $($(this).parent()[0]).attr('id').slice(-1);
-        // console.log(id);
-        $($(this).parent()[0]).css('z-index', '1')
+  //bring post-it to front on mousedown
+  $('#board').on("mousedown", '.post-it', function() {
+    $(this).parent().append(this);
   })
-
 });
 
-var post_id = 1;
+var post_id = 2;
 
 $(function() {
   // Esta es la función que correrá cuando este listo el DOM 
   board = new Board('#board');
   // make exisiting sticky draggable
-  $('.draggable').draggable({
-    containment: '#board',
-    cursor: 'move'
-  });
+  drag();
 });
 
 var Board = function( selector ) {
@@ -50,45 +42,39 @@ var Board = function( selector ) {
 };
 
 var PostIt = function(id) {
-    // Aquí va el código relacionado con un post-it
-    $('.draggable').draggable({
-      containment: '#board',
-      cursor: 'move'
-    });
-
     this.id = id
-    this.html = "<div id='master" + id + "' class='post-it draggable'><div class='header'><div class='close'>X</div></div><div class='content' contenteditable='true'>...</div></div>"
+    this.html = "<div id='master" + id + "' tabindex='" + id + "' class='post-it draggable'><div class='header'><div class='close'>X</div></div><div class='content' contenteditable='true'>...</div></div>"
 };
 
+function drag() {
+    $('.draggable').draggable({
+      containment: '#board',
+      cursor: 'move',
+      cancel: 'div.content'
+    });
+};
 
 ////////////  NEW POST IT ////////////////////////////
 function position(here) {
           var x = here.clientX; // Get the horizontal coordinate
           var y = here.clientY; // Get the vertical coordinate
-          // console.log("x: " + x + " y: " + y);
           new_post_it(x, y);
-}
+};
 
 function new_post_it(x, y) {
           post_id ++;
           post_it = new PostIt(post_id)
           board.post_its.push(post_it);
           placeDiv(x, y, post_it);
-          // console.log(x, y)
 };
 
 function placeDiv(x_pos, y_pos, post_it) {
           $('#board').append(post_it.html)
           var div = $("#master" + post_it.id);
-          // div.css('position', 'absolute');
           div.css('top', y_pos+'px');
           div.css('left', x_pos+'px');
-
-          $('.draggable').draggable({
-            containment: '#board',
-            cursor: 'move'
-          });
-}
+          drag();
+};
 
 
 

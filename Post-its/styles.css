@@ -18,6 +18,8 @@
   background-color: #c2c25b;
   text-align: right;
   padding: 2px;
+  height: 15px;
+  width: 156px;
 }
 
 .post-it .header:hover {
@@ -43,6 +45,10 @@
 .close{
   text-align: center;
   width: 15px;
+  float: right;
+}
+
+.close a:hover {
 }
 
 
