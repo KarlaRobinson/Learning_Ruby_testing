@@ -1,51 +1,49 @@
 $( document ).ready(function() {
 
-  $("#board").on('mousedown', '.close', function(e) {
+  $("#boards").on('mousedown', '.close', function(e) {
     e.stopPropagation();
-    console.log('close');
     $(this).parent().parent().remove();
   });
 
-  $('#board').on("dblclick", function(here) {
+  $('#boards').on("dblclick", function(here) {
     position(here);
   });
 
-  $("#board").on("dblclick", '.post-it', function(e) {
+  $("#boards").on("dblclick", '.post-it', function(e) {
     e.stopPropagation();
   });
 
   //bring post-it to front on mousedown
-  $('#board').on("mousedown", '.post-it', function() {
+  $('#boards').on("mousedown", '.post-it', function() {
+    $(this).parent().append(this);
+  })
+
+  $('input').on("click", function(){
+    getBoardName();
+  });
+
+  $('#boards').on("mousedown", '.post-it', function() {
     $(this).parent().append(this);
   })
 });
 
-var post_id = 2;
+var post_id = 0;
+var board_id = 0;
 
-$(function() {
-  // Esta es la función que correrá cuando este listo el DOM 
-  board = new Board('#board');
-  // make exisiting sticky draggable
-  drag();
-});
-
-var Board = function( selector ) {
-    // Aqui denerá ir el código que tenga que ver con tu tablero 
-    
-    // Utiliza esta sintaxis para referirte al selector que representa al tablero.
-    // De esta manera no dependerás tanto de tu HTML.  
-    var $elem = $( selector );
-    this.post_its = []
+var Board = function( name ) {
+    this.id = board_id
+    this.name = name; 
+    this.post_its = [];
 
     function initialize() {
-      // Que debe de pasar cuando se crea un nuevo tablero
     };
     initialize();
 };
 
-var PostIt = function(id) {
+var PostIt = function(id, text) {
     this.id = id
-    this.html = "<div id='master" + id + "' tabindex='" + id + "' class='post-it draggable'><div class='header'><div class='close'>X</div></div><div class='content' contenteditable='true'>...</div></div>"
+    this.text = text
+    this.html = "<div id='master" + id + "' class='post-it draggable'><div class='header'><div class='close'>X</div></div><div class='content' contenteditable='true'>" + text + "</div></div>"
 };
 
 function drag() {
@@ -56,27 +54,37 @@ function drag() {
     });
 };
 
+////////////  NEW BOARD ////////////////////////////
+
+function getBoardName(name) {
+   var name = prompt("Board name:", "School");
+   create_board(name);
+};
+
+function create_board(name) {
+  board_id ++;
+  this["board" + board_id] = new Board(name);
+  $('#board-nav').append("<li id='board" + board_id + "-nav'>" + name + "</li>");
+  $('#boards').append("<div id='board" + board_id + "'></div>")
+  new_post_it(518, 32, "HI", this["board" + board_id]);
+  drag();
+};
+
 ////////////  NEW POST IT ////////////////////////////
 function position(here) {
           var x = here.clientX; // Get the horizontal coordinate
           var y = here.clientY; // Get the vertical coordinate
-          new_post_it(x, y);
+          new_post_it(x, y, board1);
 };
 
-function new_post_it(x, y) {
+function new_post_it(x, y, text, board) {
           post_id ++;
-          post_it = new PostIt(post_id)
+          post_it = new PostIt(post_id, text)
           board.post_its.push(post_it);
-          placeDiv(x, y, post_it);
-};
-
-function placeDiv(x_pos, y_pos, post_it) {
-          $('#board').append(post_it.html)
-          var div = $("#master" + post_it.id);
-          div.css('top', y_pos+'px');
-          div.css('left', x_pos+'px');
+          $("#board" + board_id).append(post_it.html)
+          $("#master" + post_it.id).css('top', y +'px');
+          $("#master" + post_it.id).css('left', x +'px');
           drag();
 };
-
 
 
