@@ -25,6 +25,14 @@ $( document ).ready(function() {
   $('#boards').on("mousedown", '.post-it', function() {
     $(this).parent().append(this);
   })
+
+  $('body').on("click", "#navbar li ul li", function() {
+    $("#navbar li ul li").css('background-color','#eee')
+    $(this).css('background-color', '#9e8d68');
+    $('#' + "board" + current_board).css('display', 'none');
+    current_board = $(this).attr('id').slice(5,6);
+    $('#' + "board" + current_board).css('display', 'unset');
+  })
 });
 
 var post_id = 0;
@@ -64,13 +72,14 @@ function getBoardName(name) {
 
 function create_board(name) {
   board_id ++;
-  console.log(this["board" + current_board]);
-  $(this["board" + current_board]).css('display', 'none');
+  $('#' + "board" + current_board).css('display', 'none');
   current_board = board_id;
   this["board" + board_id] = new Board(name);
   $('#board-nav').append("<li id='board" + board_id + "-nav'>" + name + "</li>");
   $('#boards').append("<div id='board" + board_id + "'></div>")
-  new_post_it(518, 32, "HI", this["board" + board_id]);
+  $("#navbar li ul li").css('background-color','#eee')
+  $('#' + "board" + current_board + "-nav").css('background-color', '#9e8d68');
+  new_post_it(518, 32, "This is your new board: " + this["board" + board_id].name, this["board" + board_id]);
   drag();
 };
 

@@ -1,5 +1,5 @@
 body {
-  background-color: #9e8d68;
+  background-color: black;
   width: 2000px;
 }
 #navbar {
@@ -31,8 +31,8 @@ input {
 #boards {
   width: 1900px;
   float: right;
-  background-color: red;
-  /*background-color: #9e8d68;*/
+  /*background-color: red;*/
+  background-color: #9e8d68;
   margin: 0;
   padding: 0;
   height: 100%;
