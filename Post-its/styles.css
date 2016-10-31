@@ -1,12 +1,12 @@
 body {
   background-color: #9e8d68;
+  width: 2000px;
 }
 #navbar {
+  float: left;
   width: 100px;
   height: 100%;
   background-color: #eee;
-  display: block;
-  /*position: fixed;*/
 }
 
 #navbar ul {
@@ -17,7 +17,6 @@ body {
   list-style: none;
   font-weight: bold;
   font-size: 15px;
-  /*padding-top:5px;*/
   padding-top: 20px;
   padding-left: 10px;
   /*border-bottom: solid 2px;*/
@@ -30,11 +29,12 @@ input {
 }
 
 #boards {
-  float: left;
-  background-color: #9e8d68;
+  width: 1900px;
+  float: right;
+  background-color: red;
+  /*background-color: #9e8d68;*/
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100%;
 }
 

@@ -29,6 +29,7 @@ $( document ).ready(function() {
 
 var post_id = 0;
 var board_id = 0;
+var current_board = 0;
 
 var Board = function( name ) {
     this.id = board_id
@@ -63,6 +64,9 @@ function getBoardName(name) {
 
 function create_board(name) {
   board_id ++;
+  console.log(this["board" + current_board]);
+  $(this["board" + current_board]).css('display', 'none');
+  current_board = board_id;
   this["board" + board_id] = new Board(name);
   $('#board-nav').append("<li id='board" + board_id + "-nav'>" + name + "</li>");
   $('#boards').append("<div id='board" + board_id + "'></div>")
@@ -74,13 +78,13 @@ function create_board(name) {
 function position(here) {
           var x = here.clientX; // Get the horizontal coordinate
           var y = here.clientY; // Get the vertical coordinate
-          new_post_it(x, y, board1);
+          new_post_it(x, y, "...");
 };
 
-function new_post_it(x, y, text, board) {
+function new_post_it(x, y, text) {
           post_id ++;
           post_it = new PostIt(post_id, text)
-          board.post_its.push(post_it);
+          this["board" + current_board].post_its.push(post_it);
           $("#board" + board_id).append(post_it.html)
           $("#master" + post_it.id).css('top', y +'px');
           $("#master" + post_it.id).css('left', x +'px');
